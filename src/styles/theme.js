@@ -19,6 +19,7 @@ const spacing = {
 };
 
 const fontSizes = {
+  small: moderateScale(10),
   regular: moderateScale(12),
   medium: moderateScale(14),
   large: moderateScale(18),
