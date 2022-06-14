@@ -9,7 +9,6 @@ const colors = {
   grey: "#F6F6F6",
   greyCard: "#F7F7F7",
   disabled: "#E3E3E3",
-  cancelButton: "#C4C4C4",
   disabledText: "#B1B1B1",
 };
 
@@ -19,7 +18,6 @@ const spacing = {
   m: moderateScale(16),
   l: moderateScale(24),
   input: moderateScale(30),
-  button: moderateScale(36),
   xl: moderateScale(40),
   xxl: moderateScale(60),
 };
