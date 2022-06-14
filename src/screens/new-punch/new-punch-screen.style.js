@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, {css}from "styled-components/native";
 import { moderateScale } from "react-native-size-matters";
 
 export const Container = styled.View`
@@ -18,7 +18,7 @@ export const InfoContainer = styled.View`
   margin: ${({ theme }) => theme.spacing.xl}px 0 ${({ theme }) => theme.spacing.xxl}px;
 `;
 
-export const Date = styled.Text`
+export const NewPunchDate = styled.Text`
   color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
   font-weight: bold;
@@ -36,7 +36,6 @@ export const Icon = styled.View`
 
 export const TimeInput = styled.TextInput`
   flex: 1;
-  width: 100%;
   height: ${({ theme }) => theme.spacing.input}px;
   margin: ${({ theme }) => theme.spacing.s}px 0;
   margin-left: ${({ theme }) => theme.spacing.s}px
@@ -44,4 +43,13 @@ export const TimeInput = styled.TextInput`
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
   border-radius: ${moderateScale(8)}px;
   border: ${({ theme }) => theme.colors.disabled};
+
+  ${({error}) => error && css`
+    border: ${({ theme }) => theme.colors.primary};
+  `}
+`;
+
+export const ErrorMessage = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.regular}px
+  color: ${({ theme }) => theme.colors.primary};
 `;
