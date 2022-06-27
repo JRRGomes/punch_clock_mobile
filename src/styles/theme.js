@@ -17,7 +17,6 @@ const spacing = {
   s: moderateScale(8),
   m: moderateScale(16),
   l: moderateScale(24),
-  input: moderateScale(30),
   xl: moderateScale(40),
   xxl: moderateScale(60),
 };

@@ -11,11 +11,12 @@ import {
   InfoContainer,
   TimeInput,
   ErrorMessage,
-} from "./new-punch-screen.style";
-import { Button, Select } from "../../components";
+} from "./new-punch-screen.styles";
+import Button from "../../components/button/Button";
+import SelectForm from "../../components/select/SelectForm";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -39,11 +40,12 @@ const NewPunchScreen = () => {
   } = useForm({
     defaultValues: {
       project: "",
-      morningFrom: "08:00",
-      morningTo: "12:00",
+      morningFrom: "",
+      morningTo: "",
       afternoonFrom: "13:00",
       afternoonTo: "18:00",
     },
+    mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
@@ -58,7 +60,8 @@ const NewPunchScreen = () => {
           <Title>Novo Punch</Title>
           <InfoContainer>
             <NewPunchDate>{today}</NewPunchDate>
-            <ControlledSelect
+            <SelectForm
+              size="small"
               control={control}
               name="project"
               items={[
@@ -67,9 +70,7 @@ const NewPunchScreen = () => {
               ]}
               placeholder={{ label: "Selecione o projeto", value: null }}
             />
-            {errors.project && (
-                  <ErrorMessage>Escolha um projeto.</ErrorMessage>
-                )}
+            {errors.project && <ErrorMessage>Escolha um projeto.</ErrorMessage>}
             <Hours>
               <Icon>
                 <FontAwesome5
@@ -78,25 +79,24 @@ const NewPunchScreen = () => {
                   color="grey"
                 />
               </Icon>
-                <ControlledInput
-                  name="morningFrom"
-                  placeholder="08:00"
-                  control={control}
-                  keyboardType="numeric"
-                  error={errors.morningFrom}
-                />
-                {errors.morningFrom && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
-                )}
-                <ControlledInput
-                  name="morningTo"
-                  placeholder="12:00"
-                  control={control}
-                  keyboardType="numeric"
-                />
-                {errors.morningTo && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
-                )}
+              <TimeInput
+                name="morningFrom"
+                placeholder="08:00"
+                control={control}
+                error={errors.morningFrom}
+              />
+              {errors.morningFrom && (
+                <ErrorMessage>Insira uma hora.</ErrorMessage>
+              )}
+
+              <TimeInput
+                name="morningTo"
+                placeholder="12:00"
+                control={control}
+              />
+              {errors.morningTo && (
+                <ErrorMessage>Insira uma hora.</ErrorMessage>
+              )}
             </Hours>
 
             <Hours>
@@ -107,24 +107,22 @@ const NewPunchScreen = () => {
                   color="grey"
                 />
               </Icon>
-              <ControlledInput
+              <TimeInput
                 name="afternoonFrom"
                 placeholder="13:00"
                 control={control}
-                keyboardType="numeric"
               />
               {errors.afternoonFrom && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
-                )}
-              <ControlledInput
+                <ErrorMessage>Insira uma hora.</ErrorMessage>
+              )}
+              <TimeInput
                 name="afternoonTo"
                 placeholder="18:00"
                 control={control}
-                keyboardType="numeric"
               />
               {errors.afternoonTo && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
-                )}
+                <ErrorMessage>Insira uma hora.</ErrorMessage>
+              )}
             </Hours>
           </InfoContainer>
           <Button
@@ -140,37 +138,3 @@ const NewPunchScreen = () => {
 };
 
 export default NewPunchScreen;
-
-const ControlledInput = ({ control, name, placeholder, keyboardType, error }) => (
-  <Controller
-    control={control}
-    name={name}
-    render={({ field: { value, onChange, onBlur } }) => (
-      <TimeInput
-        value={value}
-        onChangeText={onChange}
-        onBlur={onBlur}
-        placeholder={placeholder}
-        keyboardType={keyboardType}
-        placeholderTextColor="grey"
-        error={error}
-      />
-    )}
-  />
-);
-
-const ControlledSelect = ({ control, name, items, placeholder, }) => (
-  <Controller
-    control={control}
-    name={name}
-    render={({ field: { value, onChange, onBlur } }) => (
-      <Select
-        value={value}
-        onValueChange={onChange}
-        onBlur={onBlur}
-        items={items}
-        placeholder={placeholder}
-      />
-    )}
-  />
-);

@@ -1,5 +1,6 @@
 import styled, {css}from "styled-components/native";
 import { moderateScale } from "react-native-size-matters";
+import InputForm from "../../components/input/InputForm";
 
 export const Container = styled.View`
   padding: ${({ theme }) => theme.spacing.m}px;
@@ -34,15 +35,11 @@ export const Icon = styled.View`
   margin-right: ${({ theme }) => theme.spacing.xs}px;
 `;
 
-export const TimeInput = styled.TextInput`
-  flex: 1;
-  height: ${({ theme }) => theme.spacing.input}px;
+export const TimeInput = styled(InputForm)`
+  ${css`flex: 1;
+  height: ${moderateScale(30)}px;
   margin: ${({ theme }) => theme.spacing.s}px 0;
-  margin-left: ${({ theme }) => theme.spacing.s}px
-  padding: ${({ theme }) => theme.spacing.s}px;
-  font-size: ${({ theme }) => theme.fontSizes.medium}px;
-  border-radius: ${moderateScale(8)}px;
-  border: ${({ theme }) => theme.colors.disabled};
+  margin-left: ${({ theme }) => theme.spacing.s}px`}
 
   ${({error}) => error && css`
     border: ${({ theme }) => theme.colors.primary};
