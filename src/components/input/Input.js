@@ -1,8 +1,16 @@
 import styled from "styled-components/native";
 import { moderateScale } from "react-native-size-matters";
 
+const getHeight = ({ size, theme }) => {
+  const variantHeight = {
+    small: moderateScale(30),
+    regular: theme.spacing.xl,
+  };
+  return variantHeight[size] || theme.spacing.xl;
+};
+
 const Input = styled.TextInput`
-  height: ${({ theme }) => theme.spacing.xl}px;
+  height: ${getHeight}px;
   padding: ${({ theme }) => theme.spacing.s}px;
   font-size: ${({ theme }) => theme.fontSizes.medium}px;
   border-radius: ${moderateScale(8)}px;

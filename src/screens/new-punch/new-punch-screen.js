@@ -9,16 +9,20 @@ import {
   Hours,
   Icon,
   InfoContainer,
-  TimeInput,
   ErrorMessage,
+  SelectErrorMessage,
+  InputWrapper,
+  SelectWrapper,
 } from "./new-punch-screen.styles";
 import Button from "../../components/button/Button";
 import SelectForm from "../../components/select/SelectForm";
+import InputForm from "../../components/input/InputForm";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigation } from "@react-navigation/native";
 
 const schema = yup
   .object({
@@ -31,6 +35,7 @@ const schema = yup
   .required();
 
 const NewPunchScreen = () => {
+  const navigation = useNavigation();
   const today = format(new Date(), "dd/MM/yyyy");
 
   const {
@@ -40,8 +45,8 @@ const NewPunchScreen = () => {
   } = useForm({
     defaultValues: {
       project: "",
-      morningFrom: "",
-      morningTo: "",
+      morningFrom: "08:00",
+      morningTo: "12:00",
       afternoonFrom: "13:00",
       afternoonTo: "18:00",
     },
@@ -60,17 +65,21 @@ const NewPunchScreen = () => {
           <Title>Novo Punch</Title>
           <InfoContainer>
             <NewPunchDate>{today}</NewPunchDate>
-            <SelectForm
-              size="small"
-              control={control}
-              name="project"
-              items={[
-                { label: "Trainee", value: "trainee" },
-                { label: "Umbrella", value: "umbrella" },
-              ]}
-              placeholder={{ label: "Selecione o projeto", value: null }}
-            />
-            {errors.project && <ErrorMessage>Escolha um projeto.</ErrorMessage>}
+            <SelectWrapper>
+              <SelectForm
+                size="small"
+                control={control}
+                name="project"
+                items={[
+                  { label: "Trainee", value: "trainee" },
+                  { label: "Umbrella", value: "umbrella" },
+                ]}
+                placeholder={{ label: "Selecione o projeto", value: null }}
+              />
+              {errors.project && (
+                <SelectErrorMessage>Escolha um projeto.</SelectErrorMessage>
+              )}
+            </SelectWrapper>
             <Hours>
               <Icon>
                 <FontAwesome5
@@ -79,24 +88,28 @@ const NewPunchScreen = () => {
                   color="grey"
                 />
               </Icon>
-              <TimeInput
-                name="morningFrom"
-                placeholder="08:00"
-                control={control}
-                error={errors.morningFrom}
-              />
-              {errors.morningFrom && (
-                <ErrorMessage>Insira uma hora.</ErrorMessage>
-              )}
-
-              <TimeInput
-                name="morningTo"
-                placeholder="12:00"
-                control={control}
-              />
-              {errors.morningTo && (
-                <ErrorMessage>Insira uma hora.</ErrorMessage>
-              )}
+              <InputWrapper>
+                <InputForm
+                  name="morningFrom"
+                  placeholder="08:00"
+                  control={control}
+                  size="small"
+                />
+                {errors.morningFrom && (
+                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                )}
+              </InputWrapper>
+              <InputWrapper>
+                <InputForm
+                  name="morningTo"
+                  placeholder="12:00"
+                  control={control}
+                  size="small"
+                />
+                {errors.morningTo && (
+                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                )}
+              </InputWrapper>
             </Hours>
 
             <Hours>
@@ -107,22 +120,28 @@ const NewPunchScreen = () => {
                   color="grey"
                 />
               </Icon>
-              <TimeInput
-                name="afternoonFrom"
-                placeholder="13:00"
-                control={control}
-              />
-              {errors.afternoonFrom && (
-                <ErrorMessage>Insira uma hora.</ErrorMessage>
-              )}
-              <TimeInput
-                name="afternoonTo"
-                placeholder="18:00"
-                control={control}
-              />
-              {errors.afternoonTo && (
-                <ErrorMessage>Insira uma hora.</ErrorMessage>
-              )}
+              <InputWrapper>
+                <InputForm
+                  name="afternoonFrom"
+                  placeholder="13:00"
+                  control={control}
+                  size="small"
+                />
+                {errors.afternoonFrom && (
+                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                )}
+              </InputWrapper>
+              <InputWrapper>
+                <InputForm
+                  name="afternoonTo"
+                  placeholder="18:00"
+                  control={control}
+                  size="small"
+                />
+                {errors.afternoonTo && (
+                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                )}
+              </InputWrapper>
             </Hours>
           </InfoContainer>
           <Button
@@ -130,7 +149,11 @@ const NewPunchScreen = () => {
             title="Salvar"
             color="primary"
           />
-          <Button onPress={() => true} title="Cancelar" color="secondary" />
+          <Button
+            onPress={() => navigation.navigate("CalendarScreen")}
+            title="Cancelar"
+            color="secondary"
+          />
         </Container>
       </View>
     </Template>

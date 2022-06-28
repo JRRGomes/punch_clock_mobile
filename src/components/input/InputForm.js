@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import Input from "./Input";
 
-const InputForm = ({ control, name, placeholder, error }) => (
+const InputForm = ({ control, name, placeholder, size }) => (
   <Controller
     control={control}
     name={name}
@@ -12,7 +12,7 @@ const InputForm = ({ control, name, placeholder, error }) => (
         onBlur={onBlur}
         placeholder={placeholder}
         placeholderTextColor="grey"
-        error={error}
+        size={size}
       />
     )}
   />
