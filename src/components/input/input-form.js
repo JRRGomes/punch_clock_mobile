@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import Input from "./Input";
+import Input from "./input";
 
 const InputForm = ({ control, name, placeholder, size }) => (
   <Controller

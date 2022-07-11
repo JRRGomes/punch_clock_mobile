@@ -1,4 +1,4 @@
-import { ButtonContainer, ButtonText } from "./Button.styles";
+import { ButtonContainer, ButtonText } from "./button.styles";
 import { moderateScale } from "react-native-size-matters";
 import theme from "../../styles/theme";
 

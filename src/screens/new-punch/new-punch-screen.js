@@ -14,9 +14,9 @@ import {
   InputWrapper,
   SelectWrapper,
 } from "./new-punch-screen.styles";
-import Button from "../../components/button/Button";
-import SelectForm from "../../components/select/SelectForm";
-import InputForm from "../../components/input/InputForm";
+import Button from "../../components/button/button";
+import SelectForm from "../../components/select/select-form";
+import InputForm from "../../components/input/input-form";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";

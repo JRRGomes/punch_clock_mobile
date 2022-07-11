@@ -1,4 +1,4 @@
-import Select from "./Select";
+import Select from "./select";
 import { Controller } from "react-hook-form";
 
 const SelectForm = ({ control, name, items, placeholder, size }) => (

@@ -1,7 +1,7 @@
 import RNPickerSelect from "react-native-picker-select";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
-import { SelectContainer } from "./Select.styles";
+import { SelectContainer } from "./select.styles";
 
 const Select = ({ items, size, onValueChange, placeholder }) => {
   return (
