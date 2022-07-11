@@ -1,61 +1,57 @@
+import FloatingButton from "@components/floating-button/floating-button";
+import NoContent from "@components/no-content/no-content";
+import Template from "@components/template/template";
+import theme from "@styles/theme";
+import { showToast, TOAST_POSITION } from "@utils/toast";
 import React from "react";
-import { View, FlatList } from "react-native";
+import { FlatList, View } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import PunchCard from "./compose/punch-card/punch-card";
-import Template from "../../components/template/template";
-import FloatingButton from "../../components/floating-button/floating-button"
-
-const DATA = [
-  {
-    id: 1,
-    projectName: "Ifood",
-    morningFrom: "09:00",
-    morningTo: "12:00",
-    afternoonFrom: "13:00",
-    afternoonTo: "18:00",
-    totalHours: "08:00",
-    date: "01/10/2021",
-  },
-  {
-    id: 2,
-    projectName: "Ifood",
-    morningFrom: "09:00",
-    morningTo: "12:00",
-    afternoonFrom: "13:00",
-    afternoonTo: "18:00",
-    totalHours: "08:00",
-    date: "01/10/2021",
-  },
-  {
-    id: 3,
-    projectName: "Ifood",
-    morningFrom: "09:00",
-    morningTo: "12:00",
-    afternoonFrom: "13:00",
-    afternoonTo: "18:00",
-    totalHours: "08:00",
-    date: "01/10/2021",
-  },
-  {
-    id: 4,
-    projectName: "Ifood",
-    morningFrom: "09:00",
-    morningTo: "12:00",
-    afternoonFrom: "13:00",
-    afternoonTo: "18:00",
-    totalHours: "08:00",
-    date: "01/10/2021",
-  },
-];
+import usePunches from "./hooks/use-punches";
 
 const PunchListScreen = () => {
+  const { punches, deletePunch, restorePunch } = usePunches();
+
+  const noPunches = punches.length === 0;
+
+  if (noPunches) return <NoContent message="Nada encontrado!" />;
+
+  const handleDeletePunch = (index, punchRemoved) => {
+    deletePunch(punchRemoved.id);
+
+    showToast({
+      text: "Punch removido. Clique aqui para reverter.",
+      position: TOAST_POSITION.BOTTOM,
+      onPressAndHide: () => {
+        restorePunch({ index, punchRemoved });
+      },
+    });
+  };
+
   return (
     <Template>
-      <View style={{ flex: 1, justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+        }}
+      >
         <FlatList
-          data={DATA}
-          renderItem={PunchCard}
+          data={punches}
+          renderItem={({ item, index }) => (
+            <PunchCard
+              item={item}
+              deletePunch={(item) => {
+                handleDeletePunch(index, item);
+              }}
+            />
+          )}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ paddingBottom: 70 }}
+          contentContainerStyle={{
+            paddingBottom: moderateScale(70),
+            paddingTop: theme.spacing.m,
+            marginHorizontal: theme.spacing.m,
+          }}
         />
       </View>
       <FloatingButton />
