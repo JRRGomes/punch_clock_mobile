@@ -1,7 +1,7 @@
 import Select from "./select";
 import { Controller } from "react-hook-form";
 
-const SelectForm = ({ control, name, items, placeholder, size }) => (
+const SelectForm = ({ control, name, items, placeholder, height }) => (
   <Controller
     control={control}
     name={name}
@@ -12,11 +12,10 @@ const SelectForm = ({ control, name, items, placeholder, size }) => (
         onBlur={onBlur}
         items={items}
         placeholder={placeholder}
-        size={size}
+        height={height}
       />
     )}
   />
 );
 
 export default SelectForm;
-

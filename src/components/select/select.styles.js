@@ -1,13 +1,8 @@
 import styled from "styled-components/native";
 import { moderateScale } from "react-native-size-matters";
 
-const getHeight = ({ size, theme }) => {
-  const variantHeight = {
-    small: moderateScale(30),
-    regular: theme.spacing.xl,
-  };
-  return variantHeight[size] || theme.spacing.xl;
-};
+const getHeight = ({ height, theme }) =>
+  moderateScale(height) || theme.spacing.xl;
 
 export const SelectContainer = styled.View`
   justify-content: center;

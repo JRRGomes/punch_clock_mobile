@@ -67,7 +67,7 @@ const NewPunchScreen = () => {
             <NewPunchDate>{today}</NewPunchDate>
             <SelectWrapper>
               <SelectForm
-                size="small"
+                height={30}
                 control={control}
                 name="project"
                 items={[
@@ -93,7 +93,7 @@ const NewPunchScreen = () => {
                   name="morningFrom"
                   placeholder="08:00"
                   control={control}
-                  size="small"
+                  height={30}
                 />
                 {errors.morningFrom && (
                   <ErrorMessage>Insira uma hora.</ErrorMessage>
@@ -104,7 +104,7 @@ const NewPunchScreen = () => {
                   name="morningTo"
                   placeholder="12:00"
                   control={control}
-                  size="small"
+                  height={30}
                 />
                 {errors.morningTo && (
                   <ErrorMessage>Insira uma hora.</ErrorMessage>
@@ -125,7 +125,7 @@ const NewPunchScreen = () => {
                   name="afternoonFrom"
                   placeholder="13:00"
                   control={control}
-                  size="small"
+                  height={30}
                 />
                 {errors.afternoonFrom && (
                   <ErrorMessage>Insira uma hora.</ErrorMessage>
@@ -136,7 +136,7 @@ const NewPunchScreen = () => {
                   name="afternoonTo"
                   placeholder="18:00"
                   control={control}
-                  size="small"
+                  height={30}
                 />
                 {errors.afternoonTo && (
                   <ErrorMessage>Insira uma hora.</ErrorMessage>
@@ -150,7 +150,7 @@ const NewPunchScreen = () => {
             color="primary"
           />
           <Button
-            onPress={() => navigation.navigate("CalendarScreen")}
+            onPress={() => navigation.navigate("PunchListScreen")}
             title="Cancelar"
             color="secondary"
           />

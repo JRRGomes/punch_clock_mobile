@@ -3,9 +3,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { SelectContainer } from "./select.styles";
 
-const Select = ({ items, size, onValueChange, placeholder }) => {
+const Select = ({ items, height, onValueChange, placeholder }) => {
   return (
-    <SelectContainer size={size}>
+    <SelectContainer height={height}>
       <RNPickerSelect
         onValueChange={onValueChange}
         placeholder={placeholder}

@@ -37,7 +37,6 @@ export const ButtonContainer = styled.TouchableOpacity`
   padding: ${(props) => props.size}px;
   border-radius: ${moderateScale(8)}px;
   ${(props) => buttonStyles[props.color]};
-
 `;
 
 export const ButtonText = styled.Text`

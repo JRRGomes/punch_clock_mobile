@@ -2,14 +2,6 @@ import { ButtonContainer, ButtonText } from "./button.styles";
 import { moderateScale } from "react-native-size-matters";
 import theme from "../../styles/theme";
 
-const Button = ({ color, size, onPress, title }) => (
-  <ButtonContainer onPress={onPress} color={color} size={getButtonSize(size)}>
-    <ButtonText color={color} size={getFontSize(size)}>{title}</ButtonText>
-  </ButtonContainer>
-);
-
-export default Button;
-
 const getButtonSize = (size) => {
   const variantButtonSize = {
     small: moderateScale(5),
@@ -27,3 +19,11 @@ const getFontSize = (size) => {
   }
   return variantFontSize[size] || theme.fontSizes.medium
 }
+
+const Button = ({ color, size, onPress, title }) => (
+  <ButtonContainer onPress={onPress} color={color} size={getButtonSize(size)}>
+    <ButtonText color={color} size={getFontSize(size)}>{title}</ButtonText>
+  </ButtonContainer>
+);
+
+export default Button;
