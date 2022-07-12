@@ -3,6 +3,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { SelectContainer } from "./select.styles";
 
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    paddingRight: 30,
+  },
+});
+
 const Select = ({ items, height, onValueChange, placeholder }) => {
   return (
     <SelectContainer height={height}>
@@ -31,12 +40,3 @@ const Select = ({ items, height, onValueChange, placeholder }) => {
 };
 
 export default Select;
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    paddingRight: 30,
-  },
-  inputAndroid: {
-    paddingRight: 30,
-  },
-});
