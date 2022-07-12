@@ -77,7 +77,7 @@ const NewPunchScreen = () => {
                 placeholder={{ label: "Selecione o projeto", value: null }}
               />
               {errors.project && (
-                <SelectErrorMessage>Escolha um projeto.</SelectErrorMessage>
+                <SelectErrorMessage>Escolha um projeto</SelectErrorMessage>
               )}
             </SelectWrapper>
             <Hours>
@@ -96,7 +96,7 @@ const NewPunchScreen = () => {
                   height={30}
                 />
                 {errors.morningFrom && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                  <ErrorMessage>Selecione as horas</ErrorMessage>
                 )}
               </InputWrapper>
               <InputWrapper>
@@ -107,7 +107,7 @@ const NewPunchScreen = () => {
                   height={30}
                 />
                 {errors.morningTo && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                  <ErrorMessage>Selecione as horas</ErrorMessage>
                 )}
               </InputWrapper>
             </Hours>
@@ -128,7 +128,7 @@ const NewPunchScreen = () => {
                   height={30}
                 />
                 {errors.afternoonFrom && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                  <ErrorMessage>Selecione as horas</ErrorMessage>
                 )}
               </InputWrapper>
               <InputWrapper>
@@ -139,7 +139,7 @@ const NewPunchScreen = () => {
                   height={30}
                 />
                 {errors.afternoonTo && (
-                  <ErrorMessage>Insira uma hora.</ErrorMessage>
+                  <ErrorMessage>Selecione as horas</ErrorMessage>
                 )}
               </InputWrapper>
             </Hours>
