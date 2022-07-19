@@ -1,7 +1,7 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useEffect } from "react";
 import Template from "../../components/template/template";
 import { moderateScale } from "react-native-size-matters";
+import { showToast, TOAST_POSITION, TOAST_TYPES } from "@utils/toast";
 import {
   Container,
   NewPunchDate,
@@ -9,8 +9,6 @@ import {
   Hours,
   Icon,
   InfoContainer,
-  ErrorMessage,
-  SelectErrorMessage,
   InputWrapper,
   SelectWrapper,
 } from "./new-punch-screen.styles";
@@ -26,11 +24,15 @@ import { useNavigation } from "@react-navigation/native";
 
 const schema = yup
   .object({
-    morningFrom: yup.string().required(),
-    morningTo: yup.string().required(),
-    afternoonFrom: yup.string().required(),
-    afternoonTo: yup.string().required(),
-    project: yup.string().required(),
+    project: yup.string().required("Projeto obrigatório"),
+    morningFrom: yup
+      .string()
+      .required("Horário início de expediente obrigatório"),
+    morningTo: yup.string().required("Horário início de almoço obrigatório"),
+    afternoonFrom: yup.string().required("Horário final de almoço obrigatório"),
+    afternoonTo: yup
+      .string()
+      .required("Horário final de expediente obrigatório"),
   })
   .required();
 
@@ -45,10 +47,10 @@ const NewPunchScreen = () => {
   } = useForm({
     defaultValues: {
       project: "",
-      morningFrom: "08:00",
-      morningTo: "12:00",
-      afternoonFrom: "13:00",
-      afternoonTo: "18:00",
+      morningFrom: "",
+      morningTo: "",
+      afternoonFrom: "",
+      afternoonTo: "",
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -57,6 +59,19 @@ const NewPunchScreen = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    const firstErrorKey = Object.keys(errors)[0];
+    const firstError = errors?.[firstErrorKey]?.message;
+
+    if (firstError) {
+      showToast({
+        text: firstError,
+        type: TOAST_TYPES.ERROR,
+        position: TOAST_POSITION.TOP,
+      });
+    }
+  }, [errors]);
 
   return (
     <Template>
@@ -75,9 +90,6 @@ const NewPunchScreen = () => {
               ]}
               placeholder={{ label: "Selecione o projeto", value: null }}
             />
-            {errors.project && (
-              <SelectErrorMessage>Escolha um projeto</SelectErrorMessage>
-            )}
           </SelectWrapper>
           <Hours>
             <Icon>
@@ -94,9 +106,6 @@ const NewPunchScreen = () => {
                 control={control}
                 height={30}
               />
-              {errors.morningFrom && (
-                <ErrorMessage>Selecione as horas</ErrorMessage>
-              )}
             </InputWrapper>
             <InputWrapper>
               <InputForm
@@ -105,9 +114,6 @@ const NewPunchScreen = () => {
                 control={control}
                 height={30}
               />
-              {errors.morningTo && (
-                <ErrorMessage>Selecione as horas</ErrorMessage>
-              )}
             </InputWrapper>
           </Hours>
 
@@ -126,9 +132,6 @@ const NewPunchScreen = () => {
                 control={control}
                 height={30}
               />
-              {errors.afternoonFrom && (
-                <ErrorMessage>Selecione as horas</ErrorMessage>
-              )}
             </InputWrapper>
             <InputWrapper>
               <InputForm
@@ -137,9 +140,6 @@ const NewPunchScreen = () => {
                 control={control}
                 height={30}
               />
-              {errors.afternoonTo && (
-                <ErrorMessage>Selecione as horas</ErrorMessage>
-              )}
             </InputWrapper>
           </Hours>
         </InfoContainer>

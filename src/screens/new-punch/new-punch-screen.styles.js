@@ -33,17 +33,6 @@ export const Icon = styled.View`
   margin-right: ${({ theme }) => theme.spacing.xs}px;
 `;
 
-export const ErrorMessage = styled.Text`
-  position: absolute;
-  top: ${moderateScale(30)}px;
-  font-size: ${({ theme }) => theme.fontSizes.regular}px
-  color: ${({ theme }) => theme.colors.primary};
-`;
-
-export const SelectErrorMessage = styled(ErrorMessage)`
-  top: ${moderateScale(38)}px;
-`;
-
 export const InputWrapper = styled.View`
   flex: 1;
   margin: ${({ theme }) => theme.spacing.s}px 0;
