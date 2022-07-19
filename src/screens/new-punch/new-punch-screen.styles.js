@@ -2,11 +2,8 @@ import styled from "styled-components/native";
 import { moderateScale } from "react-native-size-matters";
 
 export const Container = styled.View`
-  padding: ${({ theme }) => theme.spacing.m}px;
-  margin: ${({ theme }) => theme.spacing.s}px
-    ${({ theme }) => theme.spacing.m}px;
-  justify-content: space-between;
-  flex-direction: column;
+  padding: ${moderateScale(20)}px;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
@@ -16,8 +13,8 @@ export const Title = styled.Text`
 `;
 
 export const InfoContainer = styled.View`
-  margin: ${({ theme }) => theme.spacing.xl}px 0
-    ${({ theme }) => theme.spacing.xxl}px;
+  margin-top: ${({ theme }) => theme.spacing.xl}px;
+  flex: 1;
 `;
 
 export const NewPunchDate = styled.Text`

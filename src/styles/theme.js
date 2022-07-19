@@ -18,7 +18,6 @@ const spacing = {
   m: moderateScale(16),
   l: moderateScale(24),
   xl: moderateScale(40),
-  xxl: moderateScale(60),
 };
 
 const fontSizes = {

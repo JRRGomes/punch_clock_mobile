@@ -5,7 +5,7 @@ import { SafeAreaView, StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components/native";
 import { Provider } from "react-redux";
-import { store, persistor } from "@store/index";
+import { store, persistor } from "./src/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 export default function App() {
