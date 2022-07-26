@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,28 +20,61 @@ const schema = yup
   })
   .required();
 
+export const handlePunchDates = () => {
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentMonth = date.getMonth();
+  const currentDay = date.getDate();
+
+  const createDateDefiningHours = (hours, minutes) =>
+    new Date(currentYear, currentMonth, currentDay, hours, minutes);
+
+  return {
+    date,
+    createDateDefiningHours,
+  };
+};
+
 const useNewPunchScreen = () => {
+  const [currentTimeInput, setCurrentTimeInput] = useState(null);
   const navigation = useNavigation();
-  const today = format(new Date(), "dd/MM/yyyy");
+
+  const { date, createDateDefiningHours } = handlePunchDates();
+  const today = format(date, "dd/MM/yyyy");
+  const open = !!currentTimeInput;
 
   const {
     handleSubmit,
     formState: { errors },
     control,
+    getValues,
+    setValue,
   } = useForm({
     defaultValues: {
       project: "",
-      morningFrom: "",
-      morningTo: "",
-      afternoonFrom: "",
-      afternoonTo: "",
+      morningFrom: createDateDefiningHours(8, 0),
+      morningTo: createDateDefiningHours(12, 0),
+      afternoonFrom: createDateDefiningHours(13, 0),
+      afternoonTo: createDateDefiningHours(18, 0),
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
+  const values = getValues();
+
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const onDateChange = (event, date) => {
+    if (event.type === "dismissed") {
+      setCurrentTimeInput(null);
+      return;
+    }
+
+    setValue(currentTimeInput, date);
+    setCurrentTimeInput(null);
   };
 
   useEffect(() => {
@@ -63,6 +96,11 @@ const useNewPunchScreen = () => {
     navigation,
     today,
     onSubmit,
+    currentTimeInput,
+    setCurrentTimeInput,
+    values,
+    open,
+    onDateChange,
   };
 };
 

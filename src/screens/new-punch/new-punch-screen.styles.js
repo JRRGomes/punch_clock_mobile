@@ -33,7 +33,7 @@ export const Icon = styled.View`
   margin-right: ${({ theme }) => theme.spacing.xs}px;
 `;
 
-export const InputWrapper = styled.View`
+export const InputWrapper = styled.TouchableOpacity`
   flex: 1;
   margin: ${({ theme }) => theme.spacing.s}px 0;
   margin-left: ${({ theme }) => theme.spacing.s}px;
